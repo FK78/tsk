@@ -1,6 +1,5 @@
 import { TASKS_PATH } from "../lib/constants.js";
 import { readTasksFile } from "../lib/utils/readTasksFile.js";
-import { writeFile } from "fs/promises";
 import { writeTasksFile } from "../lib/utils/writeTasksFile.js";
 
 export const add = async (description) => {

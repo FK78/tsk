@@ -2,9 +2,9 @@ import { TASKS_PATH } from "../lib/constants.js";
 import { readTasksFile } from "../lib/utils/readTasksFile.js";
 import { writeTasksFile } from "../lib/utils/writeTasksFile.js";
 
-export const update = async (taskId, description) => {
-  if (!description || !taskId) {
-    console.error("Usage: tsk update <task-id> <description>");
+export const deleteTask = async (taskId) => {
+  if (!taskId) {
+    console.error("Usage: tsk delete <task-id>");
     return;
   }
 
@@ -19,22 +19,17 @@ export const update = async (taskId, description) => {
 
   const index = tasks.findIndex((t) => t.id === taskId);
 
-  if (index > -1) {
-    const userTask = {
-      ...tasks[index],
-      description: description,
-      updatedAt: new Date().toISOString(),
-    };
-    tasks[index] = userTask;
+  if (index > -1){
+    tasks.splice(index, 1)
   } else {
-    console.error("Task with that ID does not exist");
-    return;
+    console.error("Task with that ID does not exist")
+    return
   }
 
   try {
     await writeTasksFile(tasks);
-    console.log("Task updated successfully")
+    console.log("Task deleted successfully")
   } catch (err) {
-    console.error(`Error writing updated task to file: ${err}`);
+    console.error(`Error deleting task: ${err}`);
   }
 };
