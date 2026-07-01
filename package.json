@@ -1,0 +1,19 @@
+{
+  "name": "tsk",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/FK78/tsk#readme",
+  "bugs": {
+    "url": "https://github.com/FK78/tsk/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FK78/tsk.git"
+  },
+  "license": "MIT",
+  "author": "FK78",
+  "type": "module",
+  "bin": {
+    "tsk": "./index.js"
+  }
+}
