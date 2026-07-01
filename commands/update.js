@@ -1,4 +1,3 @@
-import { TASKS_PATH } from "../lib/constants.js";
 import { readTasksFile } from "../lib/utils/readTasksFile.js";
 import { writeTasksFile } from "../lib/utils/writeTasksFile.js";
 
@@ -11,7 +10,7 @@ export const update = async (taskId, description) => {
   let tasks = [];
 
   try {
-    tasks = await readTasksFile(TASKS_PATH);
+    tasks = await readTasksFile();
   } catch (err) {
     console.error(`Failed to read tasks file, error: ${err}`);
     return;

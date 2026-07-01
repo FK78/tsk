@@ -11,7 +11,7 @@ export const add = async (description) => {
   let tasks = [];
 
   try {
-    tasks = await readTasksFile(TASKS_PATH);
+    tasks = await readTasksFile();
   } catch (err) {
     if (err.code === "ENOENT") {
       // Do nothing as we'll create the file on line 30
