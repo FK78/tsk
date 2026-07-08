@@ -104,6 +104,10 @@ tsk/
 - Node.js 18+
 - A willingness to be honest with yourself
 
+## Credit
+
+Built as a solution to the [Task Tracker](https://roadmap.sh/projects/task-tracker) project on roadmap.sh.
+
 ## License
 
 MIT - do whatever you want, I'm not your manager.
