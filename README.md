@@ -1,6 +1,24 @@
-# tsk
+<p align="center">
+  <img src="./logo.svg" alt="tsk logo" width="150" />
+</p>
 
-A minimal task tracker CLI. No dependencies, just Node.js.
+<h1 align="center">tsk</h1>
+
+<p align="center">
+  <em>Because your memory is trash and you know it.</em>
+</p>
+
+<p align="center">
+  A dead-simple task tracker that lives in your terminal. No bloat. No dependencies. No excuses.
+</p>
+
+---
+
+## Why?
+
+You don't need Jira. You don't need Notion. You don't need a kanban board with 47 columns and a burndown chart for buying milk.
+
+You need to write stuff down and check it off. That's it. **tsk** does that.
 
 ## Install
 
@@ -8,7 +26,7 @@ A minimal task tracker CLI. No dependencies, just Node.js.
 npm install -g github:FK78/tsk
 ```
 
-Or clone and link locally:
+Or if you have trust issues (valid):
 
 ```bash
 git clone https://github.com/FK78/tsk.git
@@ -19,30 +37,36 @@ npm link
 ## Usage
 
 ```bash
-# Add a task
+# Remember things
 tsk add "Buy groceries"
 # Task added successfully (ID: 1)
 
-# Update a task
+# Change your mind (again)
 tsk update 1 "Buy groceries and cook dinner"
 
-# Delete a task
+# Give up entirely
 tsk delete 1
 ```
 
 ## Commands
 
-| Command | Description |
+| Command | What it does |
 |---------|-------------|
-| `tsk add <description>` | Add a new task |
-| `tsk update <id> <description>` | Update a task's description |
-| `tsk delete <id>` | Delete a task |
+| `tsk add <description>` | Add a task. Revolutionary. |
+| `tsk update <id> <description>` | Fix your typo or change your mind |
+| `tsk delete <id>` | Pretend it never existed |
+| `tsk mark-in-progress <id>` | You've started. Proud of you. |
+| `tsk mark-done <id>` | Look at you being productive |
+| `tsk list` | See everything you're avoiding |
+| `tsk list todo` | The guilt list |
+| `tsk list in-progress` | Things you started but let's be honest... |
+| `tsk list done` | Your trophy case |
 
 ## How it works
 
-Tasks are stored as JSON in `~/.tsk/tasks.json`. The file and directory are created automatically on first use.
+Tasks live in `~/.tsk/tasks.json`. Created automatically because **tsk** believes in you even when you can't find the file.
 
-Each task has:
+Each task looks like:
 
 ```json
 {
@@ -54,26 +78,32 @@ Each task has:
 }
 ```
 
+Statuses: `todo` → `in-progress` → `done` (the lifecycle of ambition)
+
 ## Project structure
 
 ```
 tsk/
-├── index.js           # CLI entry point and command dispatch
+├── index.js           # The bouncer - decides who gets in
 ├── commands/
-│   ├── add.js         # Add a task
-│   ├── update.js      # Update a task
-│   └── delete.js      # Delete a task
+│   ├── add.js         # Adds tasks to your pile
+│   ├── update.js      # For the indecisive
+│   ├── delete.js      # The denial button
+│   ├── mark.js        # Status updates for your tasks, not your ex
+│   └── list.js        # Confronts you with reality
 └── lib/
-    ├── constants.js   # Shared config (TASKS_PATH)
+    ├── constants.js   # Where the tasks file lives
     └── utils/
         ├── readTasksFile.js
-        └── writeTasksFile.js
+        ├── writeTasksFile.js
+        └── withTask.js    # The helper that does the heavy lifting
 ```
 
 ## Requirements
 
 - Node.js 18+
+- A willingness to be honest with yourself
 
 ## License
 
-MIT
+MIT - do whatever you want, I'm not your manager.
