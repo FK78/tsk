@@ -6,7 +6,7 @@ export const deleteTask = async (taskId) => {
     return;
   }
 
-  withTask(taskId, (tasks, index) => {
+  withTask(taskId, "Task deleted successfully", (tasks, index) => {
     tasks.splice(index, 1);
   });
 };
