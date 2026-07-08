@@ -13,10 +13,11 @@ export const update = async (taskId, description) => {
     tasks = await readTasksFile();
   } catch (err) {
     if (err.code === "ENOENT") {
-      console.error("No tasks found. Add a task first.")
+      console.error("No tasks found. Add a task first.");
     } else {
-    console.error(`Failed to read tasks file, error: ${err}`);
-    return;
+      console.error(`Failed to read tasks file, error: ${err}`);
+      return;
+    }
   }
 
   const index = tasks.findIndex((t) => t.id === taskId);
@@ -35,7 +36,7 @@ export const update = async (taskId, description) => {
 
   try {
     await writeTasksFile(tasks);
-    console.log("Task updated successfully")
+    console.log("Task updated successfully");
   } catch (err) {
     console.error(`Error writing updated task to file: ${err}`);
   }
