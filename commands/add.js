@@ -11,6 +11,7 @@ export const add = async (description) => {
 
   try {
     tasks = await readTasksFile();
+    if (!Array.isArray(tasks)) tasks = []
   } catch (err) {
     if (err.code === "ENOENT") {
       // Do nothing as we'll create the file on line 30
