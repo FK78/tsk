@@ -12,6 +12,9 @@ export const markInProgress = async (taskId) => {
   try {
     tasks = await readTasksFile();
   } catch (err) {
+    if (err.code === "ENOENT") {
+      console.error("No tasks found. Add a task first.")
+    } else {
     console.error(`Failed to read tasks file, error: ${err}`);
     return;
   }
@@ -49,6 +52,9 @@ export const markDone = async (taskId) => {
   try {
     tasks = await readTasksFile();
   } catch (err) {
+    if (err.code === "ENOENT") {
+      console.error("No tasks found. Add a task first.")
+    } else {
     console.error(`Failed to read tasks file, error: ${err}`);
     return;
   }
