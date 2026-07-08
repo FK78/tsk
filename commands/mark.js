@@ -13,24 +13,25 @@ export const markInProgress = async (taskId) => {
     tasks = await readTasksFile();
   } catch (err) {
     if (err.code === "ENOENT") {
-      console.error("No tasks found. Add a task first.")
+      console.error("No tasks found. Add a task first.");
     } else {
-    console.error(`Failed to read tasks file, error: ${err}`);
-    return;
-  }
+      console.error(`Failed to read tasks file, error: ${err}`);
+      return;
+    }
 
-  const index = tasks.findIndex((t) => t.id === taskId);
+    const index = tasks.findIndex((t) => t.id === taskId);
 
-  if (index > -1) {
-    const userTask = {
-      ...tasks[index],
-      status: "in-progress",
-      updatedAt: new Date().toISOString(),
-    };
-    tasks[index] = userTask;
-  } else {
-    console.error("Task with that ID does not exist");
-    return;
+    if (index > -1) {
+      const userTask = {
+        ...tasks[index],
+        status: "in-progress",
+        updatedAt: new Date().toISOString(),
+      };
+      tasks[index] = userTask;
+    } else {
+      console.error("Task with that ID does not exist");
+      return;
+    }
   }
 
   try {
@@ -53,10 +54,11 @@ export const markDone = async (taskId) => {
     tasks = await readTasksFile();
   } catch (err) {
     if (err.code === "ENOENT") {
-      console.error("No tasks found. Add a task first.")
+      console.error("No tasks found. Add a task first.");
     } else {
-    console.error(`Failed to read tasks file, error: ${err}`);
-    return;
+      console.error(`Failed to read tasks file, error: ${err}`);
+      return;
+    }
   }
 
   const index = tasks.findIndex((t) => t.id === taskId);
