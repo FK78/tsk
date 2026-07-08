@@ -1,5 +1,4 @@
-import { readTasksFile } from "../lib/utils/readTasksFile.js";
-import { writeTasksFile } from "../lib/utils/writeTasksFile.js";
+import { withTask } from "../lib/utils/withTask.js";
 
 export const update = async (taskId, description) => {
   if (!description || !taskId || isNaN(taskId)) {
