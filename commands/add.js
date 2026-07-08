@@ -20,8 +20,10 @@ export const add = async (description) => {
     }
   }
 
+  const taskId = tasks.length === 0 ? 1 : Math.max(...tasks.map(t => t.id)) + 1
+
   const userTask = {
-    id: tasks.length + 1,
+    id: taskId,
     description: description.trim(),
     status: "todo",
     createdAt: new Date().toISOString(),
