@@ -2,7 +2,7 @@ import { readTasksFile } from "../lib/utils/readTasksFile.js";
 import { writeTasksFile } from "../lib/utils/writeTasksFile.js";
 
 export const deleteTask = async (taskId) => {
-  if (!taskId) {
+  if (!taskId || isNaN(taskId)) {
     console.error("Usage: tsk delete <task-id>");
     return;
   }

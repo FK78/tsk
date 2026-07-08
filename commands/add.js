@@ -22,7 +22,7 @@ export const add = async (description) => {
 
   const userTask = {
     id: tasks.length + 1,
-    description: description,
+    description: description.trim(),
     status: "todo",
     createdAt: new Date().toISOString(),
     updatedAt: null,
