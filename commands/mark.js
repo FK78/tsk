@@ -1,5 +1,4 @@
-import { readTasksFile } from "../lib/utils/readTasksFile.js";
-import { writeTasksFile } from "../lib/utils/writeTasksFile.js";
+import { withTask } from "../lib/utils/withTask.js";
 
 export const markInProgress = async (taskId) => {
   if (!taskId || isNaN(taskId)) {
@@ -7,39 +6,14 @@ export const markInProgress = async (taskId) => {
     return;
   }
 
-  let tasks = [];
-
-  try {
-    tasks = await readTasksFile();
-  } catch (err) {
-    if (err.code === "ENOENT") {
-      console.error("No tasks found. Add a task first.");
-    } else {
-      console.error(`Failed to read tasks file, error: ${err}`);
-      return;
-    }
-
-    const index = tasks.findIndex((t) => t.id === taskId);
-
-    if (index > -1) {
-      const userTask = {
-        ...tasks[index],
-        status: "in-progress",
-        updatedAt: new Date().toISOString(),
-      };
-      tasks[index] = userTask;
-    } else {
-      console.error("Task with that ID does not exist");
-      return;
-    }
-  }
-
-  try {
-    await writeTasksFile(tasks);
-    console.log("Task marked as in progress successfully");
-  } catch (err) {
-    console.error(`Error writing updated task to file: ${err}`);
-  }
+  withTask(taskId, "Task marked as in progress successfully", (tasks, index) => {
+    const userTask = {
+      ...tasks[index],
+      status: "in-progress",
+      updatedAt: new Date().toISOString(),
+    };
+    tasks[index] = userTask;
+  });
 };
 
 export const markDone = async (taskId) => {
@@ -48,37 +22,12 @@ export const markDone = async (taskId) => {
     return;
   }
 
-  let tasks = [];
-
-  try {
-    tasks = await readTasksFile();
-  } catch (err) {
-    if (err.code === "ENOENT") {
-      console.error("No tasks found. Add a task first.");
-    } else {
-      console.error(`Failed to read tasks file, error: ${err}`);
-      return;
-    }
-  }
-
-  const index = tasks.findIndex((t) => t.id === taskId);
-
-  if (index > -1) {
+  withTask(taskId, "Task marked as done successfully", (tasks, index) => {
     const userTask = {
       ...tasks[index],
       status: "done",
       updatedAt: new Date().toISOString(),
     };
     tasks[index] = userTask;
-  } else {
-    console.error("Task with that ID does not exist");
-    return;
-  }
-
-  try {
-    await writeTasksFile(tasks);
-    console.log("Task marked as done successfully");
-  } catch (err) {
-    console.error(`Error writing updated task to file: ${err}`);
-  }
+  });
 };
